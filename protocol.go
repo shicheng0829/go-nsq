@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"regexp"
 )
 
 // MagicV1 is the initial identifier sent when connecting for V1 clients
@@ -21,8 +20,6 @@ const (
 	FrameTypeMessage  int32 = 2
 )
 
-var validTopicChannelNameRegex = regexp.MustCompile(`^[\.a-zA-Z0-9_-]+(#ephemeral)?$`)
-
 // IsValidTopicName checks a topic name for correctness
 func IsValidTopicName(name string) bool {
 	return isValidName(name)
@@ -37,7 +34,7 @@ func isValidName(name string) bool {
 	if len(name) > 64 || len(name) < 1 {
 		return false
 	}
-	return validTopicChannelNameRegex.MatchString(name)
+	return true
 }
 
 // ReadResponse is a client-side utility function to read from the supplied Reader
